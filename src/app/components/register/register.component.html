@@ -1,0 +1,77 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+
+    <form class="example-form" [formGroup]="myForm" (ngSubmit)="submitForm()">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Username" formControlName="name" />
+          <!-- error -->
+          <mat-error *ngIf="!name.valid && name.touched">
+            {{ titleAlert }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email" formControlName="email" />
+          <mat-error
+            *ngIf="
+              !myForm.controls['email'].valid &&
+              myForm.controls['email'].touched
+            "
+          >
+            {{ getErrorEmail() }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-radio-group formControlName="gender" aria-label="Select an option" class="example-full-width-radio">
+          <mat-radio-button value="male">Male</mat-radio-button> 
+          &nbsp;<mat-radio-button value="female">Female</mat-radio-button>
+          <mat-error *ngIf="!myForm.controls['gender'].valid && myForm.controls['gender'].touched"> 
+           {{ titleAlert }}
+          </mat-error>
+        </mat-radio-group>
+
+        
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Password" formControlName="password" />
+          <mat-error
+            *ngIf="
+              !myForm.controls['password'].valid &&
+              myForm.controls['password'].touched
+            "
+          >
+            {{ getErrorPassword() }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Choose a role...</mat-label>
+          <mat-select formControlName="role">
+            <mat-option [value]="roles" *ngFor="let roles of Roles"
+              >{{ roles }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="
+              !myForm.controls['role'].valid && myForm.controls['role'].touched
+            "
+          >
+            {{ titleAlert }}
+          </mat-error>
+        </mat-form-field>
+      </mat-card-content>
+
+      <button
+        [disabled]="!myForm.valid"
+        mat-stroked-button
+        color="accent"
+        class="btn-block"
+      >
+        Register
+      </button>
+    </form>
+  </mat-card>
+</div>
